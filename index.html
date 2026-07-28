@@ -102,6 +102,12 @@
   .btn-save:hover{background:var(--rust);border-color:var(--rust);}
 
   .note{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:18px;text-align:center;}
+  .thumb{width:40px;height:40px;object-fit:cover;border-radius:3px;border:1px solid var(--line-strong);cursor:pointer;display:block;}
+  .thumb:hover{border-color:var(--rust);}
+  .no-thumb{color:var(--line-strong);font-size:11px;}
+  .lightbox-overlay{background:rgba(27,35,51,0.7);display:flex;align-items:center;justify-content:center;padding:32px;}
+  .lightbox-overlay img{max-width:100%;max-height:80vh;border-radius:6px;background:#fff;}
+  .lightbox-close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;}
 </style>
 </head>
 <body>
@@ -155,7 +161,7 @@
       <div style="overflow-x:auto;">
       <table>
         <thead>
-          <tr><th>일자</th><th>상품명</th><th>유형/사유</th><th>결과</th><th>채널</th><th>주문번호</th><th></th></tr>
+          <tr><th>사진</th><th>일자</th><th>상품명</th><th>유형/사유</th><th>결과</th><th>채널</th><th>주문번호</th><th></th></tr>
         </thead>
         <tbody id="tblBody"></tbody>
       </table>
@@ -215,6 +221,13 @@
         <button class="btn-save" id="saveAdd">등록</button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="lightboxBg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;">
+  <div class="lightbox-overlay" style="width:100%;height:100%;">
+    <button class="lightbox-close" id="lightboxClose">×</button>
+    <img id="lightboxImg" src="" alt="불량 사진 확대">
   </div>
 </div>
 
@@ -344,6 +357,7 @@ function render(){
   document.getElementById('emptyMsg').style.display = filtered.length ? 'none':'block';
   tbody.innerHTML = filtered.map(r=>`
     <tr>
+      <td>${r.image ? `<img src="${r.image}" class="thumb" data-full="${r.image}" alt="${escapeHtml(r.product)} 불량 사진">` : '<span class="no-thumb">-</span>'}</td>
       <td style="white-space:nowrap;font-family:var(--mono);font-size:11.5px;">${r.date}</td>
       <td class="prod">${escapeHtml(r.product)}</td>
       <td><span class="chip">${r.type}</span><br><span class="reason">${escapeHtml(r.reason)}</span></td>
@@ -354,6 +368,13 @@ function render(){
     </tr>
   `).join('');
   document.getElementById('tblCount').textContent = filtered.length + ' / ' + records.length + '건';
+
+  tbody.querySelectorAll('.thumb').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      document.getElementById('lightboxImg').src = img.getAttribute('data-full');
+      document.getElementById('lightboxBg').classList.add('open');
+    });
+  });
 
   tbody.querySelectorAll('.del').forEach(btn=>{
     btn.addEventListener('click', async (e)=>{
@@ -559,6 +580,15 @@ document.getElementById('confirmImport').addEventListener('click', async ()=>{
   document.getElementById('importBg').classList.remove('open');
   render();
   alert(toAdd.length + '건이 추가되었습니다.');
+});
+
+document.getElementById('lightboxClose').addEventListener('click', ()=>{
+  document.getElementById('lightboxBg').classList.remove('open');
+});
+document.getElementById('lightboxBg').addEventListener('click', (e)=>{
+  if(e.target.id === 'lightboxBg' || e.target.classList.contains('lightbox-overlay')){
+    document.getElementById('lightboxBg').classList.remove('open');
+  }
 });
 
 loadRecords();
