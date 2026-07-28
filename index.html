@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SINOON · 불량 상품 누적 리포트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2333;
+    --ink-soft:#3C4356;
+    --paper:#FAFAF8;
+    --paper-2:#F1EFE9;
+    --line:#DEDAD0;
+    --line-strong:#B9B3A4;
+    --rust:#B54A2C;
+    --rust-bg:#F6E7DF;
+    --rust-text:#7A3018;
+    --sage:#4F6B52;
+    --sage-bg:#E8EDE3;
+    --sage-text:#334A36;
+    --amber-bg:#FBEFDA;
+    --amber-text:#6E4A0E;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans KR', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px;}
+
+  .masthead{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:22px;flex-wrap:wrap;gap:14px;}
+  .masthead h1{font-size:21px;font-weight:700;margin:0 0 4px;letter-spacing:-0.2px;}
+  .masthead .sub{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:0.3px;}
+  .btn-add{background:var(--ink);color:var(--paper);border:none;padding:10px 18px;border-radius:3px;font-family:var(--sans);font-weight:600;font-size:13px;cursor:pointer;}
+  .btn-add:hover{background:var(--rust);}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:26px;}
+  .tag{position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;padding:14px 16px 14px 20px;}
+  .tag::before{content:'';position:absolute;left:-1px;top:16px;width:10px;height:10px;background:var(--paper);border:1px solid var(--line);border-radius:50%;}
+  .tag .lbl{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ink-soft);display:block;margin-bottom:6px;}
+  .tag .val{font-size:24px;font-weight:700;line-height:1.1;}
+  .tag .val small{font-size:13px;font-weight:500;color:var(--ink-soft);}
+  .tag.accent .val{color:var(--rust);}
+
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px;background:var(--paper-2);border:1px solid var(--line);border-radius:5px;padding:10px 12px;}
+  .toolbar input[type=text]{flex:1;min-width:160px;}
+  .toolbar input,.toolbar select{font-family:var(--sans);font-size:13px;padding:7px 9px;border:1px solid var(--line-strong);border-radius:3px;background:#fff;color:var(--ink);}
+  .toolbar .reset{background:none;border:none;font-size:12px;color:var(--ink-soft);text-decoration:underline;cursor:pointer;padding:6px 4px;}
+
+  .layout{display:grid;grid-template-columns:1.55fr 1fr;gap:20px;align-items:start;}
+  @media (max-width:880px){.layout{grid-template-columns:1fr;} .stats{grid-template-columns:repeat(2,1fr);}}
+
+  .panel{background:#fff;border:1px solid var(--line);border-radius:5px;overflow:hidden;}
+  .panel-h{padding:12px 16px;border-bottom:1px dashed var(--line-strong);font-size:13px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .panel-h .count{font-family:var(--mono);font-size:11px;color:var(--ink-soft);font-weight:400;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  thead th{text-align:left;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-soft);padding:8px 10px;border-bottom:1px solid var(--line);background:var(--paper-2);white-space:nowrap;}
+  tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:hover{background:var(--paper-2);}
+  .prod{font-weight:600;}
+  .reason{color:var(--ink-soft);}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap;}
+  .badge.exchange{background:var(--amber-bg);color:var(--amber-text);}
+  .badge.return{background:var(--rust-bg);color:var(--rust-text);}
+  .chip{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:3px;padding:1px 6px;}
+  .del{background:none;border:none;color:var(--ink-soft);cursor:pointer;font-size:15px;padding:0 4px;line-height:1;}
+  .del:hover{color:var(--rust);}
+  .empty{padding:30px 16px;text-align:center;color:var(--ink-soft);font-size:13px;}
+
+  .barlist{padding:14px 16px;}
+  .barrow{margin-bottom:12px;cursor:pointer;}
+  .barrow-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;}
+  .barrow-top .n{font-weight:600;}
+  .barrow-top .c{font-family:var(--mono);color:var(--ink-soft);}
+  .bartrack{height:7px;background:var(--paper-2);border-radius:4px;overflow:hidden;}
+  .barfill{height:100%;background:var(--rust);border-radius:4px;}
+  .barrow.active .barrow-top .n{color:var(--rust);}
+
+  .typegrid{padding:14px 16px;display:flex;flex-direction:column;gap:8px;}
+  .typerow{display:flex;justify-content:space-between;font-size:12.5px;padding:6px 0;border-bottom:1px dashed var(--line);}
+  .typerow:last-child{border-bottom:none;}
+  .typerow .n{color:var(--ink-soft);}
+  .typerow .v{font-family:var(--mono);font-weight:600;}
+
+  .modal-bg{position:relative;display:none;min-height:1px;}
+  .modal-bg.open{display:block;}
+  .modal-overlay{background:rgba(27,35,51,0.45);display:flex;align-items:center;justify-content:center;padding:24px;}
+  .modal{background:#fff;border-radius:6px;max-width:440px;width:100%;padding:22px 24px;border:1px solid var(--line);}
+  .modal h3{margin:0 0 4px;font-size:16px;}
+  .modal .sub{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-bottom:16px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:12px;font-weight:600;margin-bottom:5px;}
+  .field input,.field select{width:100%;font-family:var(--sans);font-size:13px;padding:8px 10px;border:1px solid var(--line-strong);border-radius:3px;background:var(--paper);}
+  .field-row{display:flex;gap:10px;}
+  .field-row .field{flex:1;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
+  .modal-actions button{padding:9px 16px;border-radius:3px;font-size:13px;font-family:var(--sans);cursor:pointer;}
+  .btn-cancel{background:none;border:1px solid var(--line-strong);color:var(--ink-soft);}
+  .btn-save{background:var(--ink);border:1px solid var(--ink);color:#fff;font-weight:600;}
+  .btn-save:hover{background:var(--rust);border-color:var(--rust);}
+
+  .note{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:18px;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div>
+      <h1>SINOON 불량 상품 누적 리포트</h1>
+      <div class="sub" id="dateRange">DEFECT LOG · LOADING...</div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-add" id="openImport" style="background:#fff;color:var(--ink);border:1px solid var(--line-strong);">구글시트에서 붙여넣기</button>
+      <button class="btn-add" id="openAdd">+ 불량 항목 등록</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="tag accent">
+      <span class="lbl">총 누적 불량</span>
+      <div class="val" id="statTotal">0<small> 건</small></div>
+    </div>
+    <div class="tag">
+      <span class="lbl">최근 7일 신규</span>
+      <div class="val" id="statRecent">0<small> 건</small></div>
+    </div>
+    <div class="tag">
+      <span class="lbl">최다 불량 상품</span>
+      <div class="val" id="statTop" style="font-size:15px;font-weight:700;">-</div>
+    </div>
+    <div class="tag">
+      <span class="lbl">반품 : 교환</span>
+      <div class="val" id="statRatio" style="font-size:18px;">0 : 0</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="fSearch" placeholder="상품명 또는 사유 검색">
+    <select id="fChannel"><option value="">전체 채널</option></select>
+    <select id="fType"><option value="">전체 유형</option></select>
+    <select id="fResult">
+      <option value="">반품/교환 전체</option>
+      <option value="반품">반품</option>
+      <option value="교환">교환</option>
+    </select>
+    <button class="reset" id="fReset">필터 초기화</button>
+  </div>
+
+  <div class="layout">
+    <div class="panel">
+      <div class="panel-h">불량 등록 내역<span class="count" id="tblCount"></span></div>
+      <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr><th>일자</th><th>상품명</th><th>유형/사유</th><th>결과</th><th>채널</th><th>주문번호</th><th></th></tr>
+        </thead>
+        <tbody id="tblBody"></tbody>
+      </table>
+      </div>
+      <div class="empty" id="emptyMsg" style="display:none;">조건에 맞는 불량 항목이 없습니다.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="panel">
+        <div class="panel-h">상품별 누적 TOP<span class="count">클릭 시 표에 필터 적용</span></div>
+        <div class="barlist" id="barList"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h">불량 유형별 분포</div>
+        <div class="typegrid" id="typeGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">기본 데이터는 구글시트에서 매일 자동 동기화됩니다 · "+ 등록"으로 추가한 항목은 다음 시트 동기화 전까지 이 브라우저에서만 보입니다</div>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal-overlay">
+    <div class="modal">
+      <h3>불량 항목 등록</h3>
+      <div class="sub">등록 즉시 누적 리포트에 반영됩니다</div>
+      <div class="field-row">
+        <div class="field"><label>처리일자</label><input type="date" id="inDate"></div>
+        <div class="field"><label>처리결과</label>
+          <select id="inResult"><option value="반품">반품</option><option value="교환">교환</option></select>
+        </div>
+      </div>
+      <div class="field"><label>상품명</label><input type="text" id="inProduct" placeholder="예: Sn Classic Logo Half Knit (Blue)"></div>
+      <div class="field-row">
+        <div class="field"><label>불량 유형</label>
+          <select id="inType">
+            <option value="오염/변색">오염/변색</option>
+            <option value="봉제 불량">봉제 불량</option>
+            <option value="파손/탈락">파손/탈락</option>
+            <option value="지퍼/부속 고장">지퍼/부속 고장</option>
+            <option value="사이즈 불량">사이즈 불량</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div class="field"><label>채널</label>
+          <select id="inChannel">
+            <option>29CM</option><option>무신사</option><option>자사몰</option>
+            <option>카카오</option><option>무신사글로벌</option><option>오프라인</option><option>기타</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>상세 사유</label><input type="text" id="inReason" placeholder="예: 노란색 오염"></div>
+      <div class="field"><label>주문번호 (선택)</label><input type="text" id="inOrder" placeholder="예: ORD20260712-8936890"></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancelAdd">취소</button>
+        <button class="btn-save" id="saveAdd">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="importBg">
+  <div class="modal-overlay">
+    <div class="modal" style="max-width:640px;">
+      <h3>구글시트에서 붙여넣기</h3>
+      <div class="sub">열 순서: 처리일자 | 상품명 | 유형 | 사유 | 처리결과 | 채널 | 주문번호(선택)</div>
+      <div class="field">
+        <label>구글시트에서 표 영역을 복사(Ctrl+C)한 뒤 아래에 붙여넣으세요(Ctrl+V)</label>
+        <textarea id="importText" rows="6" style="width:100%;font-family:var(--mono);font-size:12px;padding:10px;border:1px solid var(--line-strong);border-radius:3px;background:var(--paper);resize:vertical;" placeholder="2026-07-28	Sn Classic Logo Half Knit (Blue)	오염/변색	노란색 오염	교환	29CM	ORD..."></textarea>
+      </div>
+      <button class="btn-cancel" id="parseImport" style="border-color:var(--ink);">미리보기</button>
+      <div id="importPreviewWrap" style="display:none;margin-top:14px;">
+        <div style="font-size:12px;font-weight:600;margin-bottom:6px;">미리보기 (<span id="previewCount">0</span>건 · 체크된 항목만 가져옵니다)</div>
+        <div style="max-height:260px;overflow-y:auto;border:1px solid var(--line);border-radius:4px;">
+          <table style="font-size:11.5px;">
+            <thead><tr><th></th><th>일자</th><th>상품명</th><th>유형</th><th>사유</th><th>결과</th><th>채널</th></tr></thead>
+            <tbody id="importPreviewBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="cancelImport">취소</button>
+        <button class="btn-save" id="confirmImport" disabled>선택 항목 가져오기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const MANUAL_KEY = 'sinoon-manual-defects';
+const HIDDEN_KEY = 'sinoon-hidden-defect-ids';
+let baseRecords = [];
+let syncedAt = null;
+let records = [];
+let activeProductFilter = null;
+
+function readManual(){
+  try{ return JSON.parse(localStorage.getItem(MANUAL_KEY) || '[]'); }catch(e){ return []; }
+}
+function writeManual(list){
+  localStorage.setItem(MANUAL_KEY, JSON.stringify(list));
+}
+function readHidden(){
+  try{ return JSON.parse(localStorage.getItem(HIDDEN_KEY) || '[]'); }catch(e){ return []; }
+}
+function writeHidden(list){
+  localStorage.setItem(HIDDEN_KEY, JSON.stringify(list));
+}
+
+function mergeRecords(){
+  const hidden = readHidden();
+  const manual = readManual();
+  records = baseRecords.filter(r => !hidden.includes(r.id)).concat(manual);
+}
+
+async function loadRecords(){
+  try{
+    const res = await fetch('./data/defects.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+    baseRecords = data.records || [];
+    syncedAt = data.synced_at || null;
+  }catch(e){
+    baseRecords = [];
+    syncedAt = null;
+  }
+  mergeRecords();
+  render();
+}
+
+async function saveManualRecord(rec){
+  const manual = readManual();
+  manual.push(rec);
+  writeManual(manual);
+  mergeRecords();
+}
+
+async function removeRecord(id){
+  const isBase = baseRecords.some(r => r.id === id);
+  if(isBase){
+    const hidden = readHidden();
+    if(!hidden.includes(id)){ hidden.push(id); writeHidden(hidden); }
+  }else{
+    const manual = readManual().filter(r => r.id !== id);
+    writeManual(manual);
+  }
+  mergeRecords();
+}
+
+function fmtDate(d){
+  const dt = new Date(d+'T00:00:00');
+  const days = ['일','월','화','수','목','금','토'];
+  return d + '(' + days[dt.getDay()] + ')';
+}
+
+function populateFilterOptions(){
+  const channels = [...new Set(records.map(r=>r.channel))].sort();
+  const types = [...new Set(records.map(r=>r.type))].sort();
+  const chSel = document.getElementById('fChannel');
+  const tySel = document.getElementById('fType');
+  chSel.innerHTML = '<option value="">전체 채널</option>' + channels.map(c=>`<option value="${c}">${c}</option>`).join('');
+  tySel.innerHTML = '<option value="">전체 유형</option>' + types.map(t=>`<option value="${t}">${t}</option>`).join('');
+}
+
+function getFiltered(){
+  const q = document.getElementById('fSearch').value.trim().toLowerCase();
+  const ch = document.getElementById('fChannel').value;
+  const ty = document.getElementById('fType').value;
+  const rs = document.getElementById('fResult').value;
+  return records.filter(r=>{
+    if(activeProductFilter && r.product !== activeProductFilter) return false;
+    if(ch && r.channel !== ch) return false;
+    if(ty && r.type !== ty) return false;
+    if(rs && r.result !== rs) return false;
+    if(q && !(r.product.toLowerCase().includes(q) || r.reason.toLowerCase().includes(q))) return false;
+    return true;
+  }).sort((a,b)=> b.date.localeCompare(a.date));
+}
+
+function render(){
+  populateFilterOptions();
+  const filtered = getFiltered();
+
+  const tbody = document.getElementById('tblBody');
+  document.getElementById('emptyMsg').style.display = filtered.length ? 'none':'block';
+  tbody.innerHTML = filtered.map(r=>`
+    <tr>
+      <td style="white-space:nowrap;font-family:var(--mono);font-size:11.5px;">${r.date}</td>
+      <td class="prod">${escapeHtml(r.product)}</td>
+      <td><span class="chip">${r.type}</span><br><span class="reason">${escapeHtml(r.reason)}</span></td>
+      <td><span class="badge ${r.result==='교환'?'exchange':'return'}">${r.result}</span></td>
+      <td>${r.channel}</td>
+      <td style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);">${r.orderNo||'-'}</td>
+      <td><button class="del" data-id="${r.id}" title="삭제">×</button></td>
+    </tr>
+  `).join('');
+  document.getElementById('tblCount').textContent = filtered.length + ' / ' + records.length + '건';
+
+  tbody.querySelectorAll('.del').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      const id = e.target.getAttribute('data-id');
+      if(confirm('이 항목을 삭제할까요?')){
+        await removeRecord(id);
+        render();
+      }
+    });
+  });
+
+  const total = records.length;
+  document.getElementById('statTotal').innerHTML = total + '<small> 건</small>';
+
+  const now = new Date();
+  const weekAgo = new Date(now); weekAgo.setDate(now.getDate()-7);
+  const recentCount = records.filter(r=> new Date(r.date+'T00:00:00') >= weekAgo).length;
+  document.getElementById('statRecent').innerHTML = recentCount + '<small> 건</small>';
+
+  const byProduct = {};
+  records.forEach(r=>{ byProduct[r.product] = (byProduct[r.product]||0)+1; });
+  const sortedProducts = Object.entries(byProduct).sort((a,b)=>b[1]-a[1]);
+  document.getElementById('statTop').textContent = sortedProducts.length ? (sortedProducts[0][0] + ' (' + sortedProducts[0][1] + '건)') : '-';
+
+  const returns = records.filter(r=>r.result==='반품').length;
+  const exchanges = records.filter(r=>r.result==='교환').length;
+  document.getElementById('statRatio').textContent = returns + ' : ' + exchanges;
+
+  const syncLabel = syncedAt ? ('마지막 시트 동기화 ' + new Date(syncedAt).toLocaleString('ko-KR', {hour12:false})) : '시트 동기화 대기중';
+  document.getElementById('dateRange').textContent = 'DEFECT LOG · ' + total + '건 누적 · ' + syncLabel;
+
+  const maxCount = sortedProducts.length ? sortedProducts[0][1] : 1;
+  const barList = document.getElementById('barList');
+  const top = sortedProducts.slice(0,8);
+  barList.innerHTML = top.length ? top.map(([name,count])=>`
+    <div class="barrow ${activeProductFilter===name?'active':''}" data-name="${escapeHtml(name)}">
+      <div class="barrow-top"><span class="n">${escapeHtml(name)}</span><span class="c">${count}건</span></div>
+      <div class="bartrack"><div class="barfill" style="width:${Math.max(6,(count/maxCount)*100)}%;"></div></div>
+    </div>
+  `).join('') : '<div style="color:var(--ink-soft);font-size:12.5px;">등록된 데이터가 없습니다.</div>';
+
+  barList.querySelectorAll('.barrow').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const name = el.getAttribute('data-name');
+      activeProductFilter = (activeProductFilter===name) ? null : name;
+      render();
+    });
+  });
+
+  const byType = {};
+  records.forEach(r=>{ byType[r.type] = (byType[r.type]||0)+1; });
+  const typeGrid = document.getElementById('typeGrid');
+  const typeEntries = Object.entries(byType).sort((a,b)=>b[1]-a[1]);
+  typeGrid.innerHTML = typeEntries.length ? typeEntries.map(([t,c])=>`
+    <div class="typerow"><span class="n">${t}</span><span class="v">${c}건</span></div>
+  `).join('') : '<div style="color:var(--ink-soft);font-size:12.5px;">등록된 데이터가 없습니다.</div>';
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+['fSearch','fChannel','fType','fResult'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', render);
+  document.getElementById(id).addEventListener('change', render);
+});
+document.getElementById('fReset').addEventListener('click', ()=>{
+  document.getElementById('fSearch').value='';
+  document.getElementById('fChannel').value='';
+  document.getElementById('fType').value='';
+  document.getElementById('fResult').value='';
+  activeProductFilter = null;
+  render();
+});
+
+document.getElementById('openAdd').addEventListener('click', ()=>{
+  document.getElementById('inDate').value = new Date().toISOString().slice(0,10);
+  document.getElementById('inProduct').value='';
+  document.getElementById('inReason').value='';
+  document.getElementById('inOrder').value='';
+  document.getElementById('modalBg').classList.add('open');
+});
+document.getElementById('cancelAdd').addEventListener('click', ()=>{
+  document.getElementById('modalBg').classList.remove('open');
+});
+document.getElementById('saveAdd').addEventListener('click', async ()=>{
+  const product = document.getElementById('inProduct').value.trim();
+  const reason = document.getElementById('inReason').value.trim();
+  if(!product || !reason){
+    alert('상품명과 상세 사유는 필수입니다.');
+    return;
+  }
+  const rec = {
+    id: Date.now().toString(),
+    date: document.getElementById('inDate').value || new Date().toISOString().slice(0,10),
+    product: product,
+    type: document.getElementById('inType').value,
+    reason: reason,
+    result: document.getElementById('inResult').value,
+    channel: document.getElementById('inChannel').value,
+    orderNo: document.getElementById('inOrder').value.trim()
+  };
+  await saveManualRecord(rec);
+  document.getElementById('modalBg').classList.remove('open');
+  render();
+});
+
+const VALID_TYPES = ['오염/변색','봉제 불량','파손/탈락','지퍼/부속 고장','사이즈 불량','기타'];
+const VALID_RESULTS = ['반품','교환'];
+let parsedRows = [];
+
+function normDate(s){
+  s = s.trim();
+  let m = s.match(/^(\d{4})[-.\/](\d{1,2})[-.\/](\d{1,2})/);
+  if(m) return m[1]+'-'+m[2].padStart(2,'0')+'-'+m[3].padStart(2,'0');
+  m = s.match(/^(\d{1,2})[-.\/](\d{1,2})[-.\/](\d{4})/);
+  if(m) return m[3]+'-'+m[1].padStart(2,'0')+'-'+m[2].padStart(2,'0');
+  return s;
+}
+
+function parsePastedText(text){
+  const lines = text.split(/\r?\n/).map(l=>l.trim()).filter(l=>l.length);
+  const rows = [];
+  lines.forEach(line=>{
+    let cols = line.includes('\t') ? line.split('\t') : line.split(',');
+    cols = cols.map(c=>c.trim());
+    if(cols.length < 4) return;
+    if(/처리일자|일자|날짜/.test(cols[0])) return;
+    const date = normDate(cols[0]);
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
+    const product = cols[1] || '';
+    let type = cols[2] || '기타';
+    if(!VALID_TYPES.includes(type)) type = '기타';
+    const reason = cols[3] || '';
+    let result = (cols[4]||'').trim();
+    if(!VALID_RESULTS.includes(result)) result = /교환/.test(result) ? '교환' : '반품';
+    const channel = cols[5] || '기타';
+    const orderNo = cols[6] || '';
+    if(!product) return;
+    rows.push({id: Date.now().toString()+Math.random().toString(36).slice(2,7), date, product, type, reason, result, channel, orderNo, include:true});
+  });
+  return rows;
+}
+
+function isDuplicate(row){
+  return records.some(r => r.date===row.date && r.product===row.product && r.reason===row.reason && r.channel===row.channel);
+}
+
+document.getElementById('openImport').addEventListener('click', ()=>{
+  document.getElementById('importText').value='';
+  document.getElementById('importPreviewWrap').style.display='none';
+  document.getElementById('confirmImport').disabled = true;
+  document.getElementById('importBg').classList.add('open');
+});
+document.getElementById('cancelImport').addEventListener('click', ()=>{
+  document.getElementById('importBg').classList.remove('open');
+});
+
+document.getElementById('parseImport').addEventListener('click', ()=>{
+  const text = document.getElementById('importText').value;
+  parsedRows = parsePastedText(text);
+  const body = document.getElementById('importPreviewBody');
+  if(!parsedRows.length){
+    body.innerHTML = '<tr><td colspan="7" style="padding:14px;color:var(--ink-soft);">인식된 행이 없습니다. 열 순서를 확인해주세요.</td></tr>';
+    document.getElementById('previewCount').textContent = '0';
+    document.getElementById('importPreviewWrap').style.display='block';
+    document.getElementById('confirmImport').disabled = true;
+    return;
+  }
+  body.innerHTML = parsedRows.map((r,i)=>{
+    const dup = isDuplicate(r);
+    return `<tr style="${dup?'opacity:0.5;':''}">
+      <td><input type="checkbox" data-idx="${i}" ${dup?'':'checked'} class="rowChk"></td>
+      <td style="font-family:var(--mono);white-space:nowrap;">${r.date}</td>
+      <td>${escapeHtml(r.product)}${dup?' <span class="chip">중복추정</span>':''}</td>
+      <td>${r.type}</td>
+      <td>${escapeHtml(r.reason)}</td>
+      <td>${r.result}</td>
+      <td>${r.channel}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('previewCount').textContent = parsedRows.length;
+  document.getElementById('importPreviewWrap').style.display='block';
+  document.getElementById('confirmImport').disabled = false;
+});
+
+document.getElementById('confirmImport').addEventListener('click', async ()=>{
+  const checks = document.querySelectorAll('.rowChk');
+  const toAdd = [];
+  checks.forEach(chk=>{
+    if(chk.checked){
+      toAdd.push(parsedRows[parseInt(chk.getAttribute('data-idx'))]);
+    }
+  });
+  if(!toAdd.length){
+    document.getElementById('importBg').classList.remove('open');
+    return;
+  }
+  const manual = readManual();
+  toAdd.forEach(r=>{ delete r.include; manual.push(r); });
+  writeManual(manual);
+  mergeRecords();
+  document.getElementById('importBg').classList.remove('open');
+  render();
+  alert(toAdd.length + '건이 추가되었습니다.');
+});
+
+loadRecords();
+</script>
+</body>
+</html>
