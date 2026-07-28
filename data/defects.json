@@ -3,6 +3,7 @@
   "count": 50,
   "records": [
     {
+      "id": "605894e6a994",
       "date": "2026-07-24",
       "product": "Clover Ring",
       "type": "파손/탈락",
@@ -10,9 +11,10 @@
       "result": "교환",
       "channel": "카카오",
       "orderNo": "3398887499",
-      "id": "605894e6a994"
+      "image": "images/605894e6a994.jpg"
     },
     {
+      "id": "784c76f5fd93",
       "date": "2026-07-24",
       "product": "Piece Peach Puff T-Shirt (White)",
       "type": "오염/변색",
@@ -20,9 +22,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260712-8266914",
-      "id": "784c76f5fd93"
+      "image": "images/784c76f5fd93.jpg"
     },
     {
+      "id": "8385a7e6b823",
       "date": "2026-07-24",
       "product": "Sn Classic Logo Half Knit (Blue)",
       "type": "기타",
@@ -30,9 +33,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260712-8936890",
-      "id": "8385a7e6b823"
+      "image": "images/8385a7e6b823.png"
     },
     {
+      "id": "bb1a6c141627",
       "date": "2026-07-23",
       "product": "CHIFFON FRILL STRIPE LONG SKIRT",
       "type": "지퍼/부속 고장",
@@ -40,9 +44,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260712-8615420",
-      "id": "bb1a6c141627"
+      "image": "images/bb1a6c141627.jpg"
     },
     {
+      "id": "67f5a70a9255",
       "date": "2026-07-23",
       "product": "Tiny Ponies T-Shirt",
       "type": "오염/변색",
@@ -50,9 +55,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202607160011420000",
-      "id": "67f5a70a9255"
+      "image": "images/67f5a70a9255.jpg"
     },
     {
+      "id": "bd95b7c2cbf6",
       "date": "2026-07-22",
       "product": "Bolero Knit Cardigan (Ivory)",
       "type": "파손/탈락",
@@ -60,9 +66,10 @@
       "result": "교환",
       "channel": "자사몰",
       "orderNo": "20260718-0000227",
-      "id": "bd95b7c2cbf6"
+      "image": "images/bd95b7c2cbf6.jpg"
     },
     {
+      "id": "d4538be3b85c",
       "date": "2026-07-22",
       "product": "Braided One-Shoulder T-Shirt",
       "type": "봉제 불량",
@@ -70,9 +77,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202607100632150016",
-      "id": "d4538be3b85c"
+      "image": "images/d4538be3b85c.jpg"
     },
     {
+      "id": "e9514cc17b40",
       "date": "2026-07-22",
       "product": "Clover Ring",
       "type": "파손/탈락",
@@ -80,9 +88,10 @@
       "result": "교환",
       "channel": "카카오",
       "orderNo": "3405340370",
-      "id": "e9514cc17b40"
+      "image": "images/e9514cc17b40.png"
     },
     {
+      "id": "921af34a1904",
       "date": "2026-07-22",
       "product": "Mini Apple Necklace Set",
       "type": "기타",
@@ -90,9 +99,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202607080014150016",
-      "id": "921af34a1904"
+      "image": "images/921af34a1904.jpg"
     },
     {
+      "id": "890848531fe3",
       "date": "2026-07-22",
       "product": "Floral Mix Bracelet (Silver Gold)",
       "type": "파손/탈락",
@@ -100,9 +110,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260706-4972975",
-      "id": "890848531fe3"
+      "image": "images/890848531fe3.jpg"
     },
     {
+      "id": "c6ab9117c98c",
       "date": "2026-07-22",
       "product": "Double Button Cardigan (Green)",
       "type": "봉제 불량",
@@ -110,9 +121,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260710-7466921",
-      "id": "c6ab9117c98c"
+      "image": "images/c6ab9117c98c.jpg"
     },
     {
+      "id": "46c3ee76d5e6",
       "date": "2026-07-22",
       "product": "CHIFFON FRILL STRIPE LONG SKIRT",
       "type": "지퍼/부속 고장",
@@ -120,9 +132,10 @@
       "result": "반품",
       "channel": "자사몰",
       "orderNo": "20260714-0000629",
-      "id": "46c3ee76d5e6"
+      "image": "images/46c3ee76d5e6.jpg"
     },
     {
+      "id": "075982611e54",
       "date": "2026-07-21",
       "product": "Twin Peach Necklace (Silver)",
       "type": "파손/탈락",
@@ -130,9 +143,10 @@
       "result": "반품",
       "channel": "카카오",
       "orderNo": "3382710329",
-      "id": "075982611e54"
+      "image": "images/075982611e54.png"
     },
     {
+      "id": "cfaa846ae325",
       "date": "2026-07-21",
       "product": "Sn Classic Logo Half Knit (Blue)",
       "type": "오염/변색",
@@ -140,9 +154,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260712-8936890",
-      "id": "cfaa846ae325"
+      "image": "images/cfaa846ae325.jpg"
     },
     {
+      "id": "41066ffe8352",
       "date": "2026-07-21",
       "product": "Satin Lace Ribbon Onepiece (Moss Green)",
       "type": "오염/변색",
@@ -150,9 +165,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202607100118049984",
-      "id": "41066ffe8352"
+      "image": "images/41066ffe8352.jpg"
     },
     {
+      "id": "0cf9000adcf7",
       "date": "2026-07-20",
       "product": "Floral Mix Bracelet (Silver Gold)",
       "type": "파손/탈락",
@@ -160,9 +176,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260707-5047231",
-      "id": "0cf9000adcf7"
+      "image": "images/0cf9000adcf7.jpg"
     },
     {
+      "id": "0f328f62d21d",
       "date": "2026-07-20",
       "product": "LACE SLEEVELESS DRESS (WHITE)",
       "type": "봉제 불량",
@@ -170,9 +187,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260706-4608194",
-      "id": "0f328f62d21d"
+      "image": "images/0f328f62d21d.jpg"
     },
     {
+      "id": "eda0eb5986bf",
       "date": "2026-07-16",
       "product": "Sinoon Signature Logo T-Shirts (White/Apricot)",
       "type": "오염/변색",
@@ -180,9 +198,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260704-3198056",
-      "id": "eda0eb5986bf"
+      "image": "images/eda0eb5986bf.jpg"
     },
     {
+      "id": "769895b62ed0",
       "date": "2026-07-16",
       "product": "Rose Cosmetic Pouch (Green Mix)",
       "type": "봉제 불량",
@@ -190,9 +209,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260630-0382336",
-      "id": "769895b62ed0"
+      "image": "images/769895b62ed0.jpg"
     },
     {
+      "id": "29e9dd749cd0",
       "date": "2026-07-16",
       "product": "SATIN LACE RIBBON ONEPIECE",
       "type": "지퍼/부속 고장",
@@ -200,9 +220,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260712-8475490",
-      "id": "29e9dd749cd0"
+      "image": "images/29e9dd749cd0.jpg"
     },
     {
+      "id": "103e40ca797d",
       "date": "2026-07-16",
       "product": "GRAPHIC MINI SKIRT (CREAM)",
       "type": "지퍼/부속 고장",
@@ -210,9 +231,10 @@
       "result": "교환",
       "channel": "자사몰",
       "orderNo": "20260713-0000358",
-      "id": "103e40ca797d"
+      "image": "images/103e40ca797d.jpg"
     },
     {
+      "id": "f666b1079834",
       "date": "2026-07-16",
       "product": "DOUBLE TUCK SHORTS (GREY)",
       "type": "지퍼/부속 고장",
@@ -220,9 +242,10 @@
       "result": "반품",
       "channel": "자사몰",
       "orderNo": "20260711-0000131",
-      "id": "f666b1079834"
+      "image": "images/f666b1079834.jpg"
     },
     {
+      "id": "e26ec5ac7f4a",
       "date": "2026-07-16",
       "product": "DOUBLE COLLAR BLOUSE (WHITE)",
       "type": "봉제 불량",
@@ -230,9 +253,10 @@
       "result": "교환",
       "channel": "자사몰",
       "orderNo": "20260713-0000013",
-      "id": "e26ec5ac7f4a"
+      "image": "images/e26ec5ac7f4a.jpg"
     },
     {
+      "id": "53587e462ecf",
       "date": "2026-07-15",
       "product": "Embroidered Rose Cardigan (Greyish Blue)",
       "type": "봉제 불량",
@@ -240,9 +264,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260706-4419511",
-      "id": "53587e462ecf"
+      "image": "images/53587e462ecf.jpg"
     },
     {
+      "id": "59f092b1880a",
       "date": "2026-07-14",
       "product": "Mini Apple Necklace Set (Silver Gold)",
       "type": "오염/변색",
@@ -250,9 +275,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260630-0933493",
-      "id": "59f092b1880a"
+      "image": "images/59f092b1880a.jpg"
     },
     {
+      "id": "2f798de747f7",
       "date": "2026-07-10",
       "product": "BLURRY TOUR SWEATSHIRT (LIGHT GREY)",
       "type": "오염/변색",
@@ -260,9 +286,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260701-1955950",
-      "id": "2f798de747f7"
+      "image": "images/2f798de747f7.jpg"
     },
     {
+      "id": "b20cde23aa01",
       "date": "2026-07-10",
       "product": "Eggplant Drop Necklace",
       "type": "기타",
@@ -270,9 +297,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260603-7866894",
-      "id": "b20cde23aa01"
+      "image": "images/b20cde23aa01.png"
     },
     {
+      "id": "37f5a29090e7",
       "date": "2026-07-10",
       "product": "Blurry Tour Sweatshirt (Light Grey)",
       "type": "오염/변색",
@@ -280,9 +308,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260701-1414448",
-      "id": "37f5a29090e7"
+      "image": "images/37f5a29090e7.jpg"
     },
     {
+      "id": "e78fde61e29a",
       "date": "2026-07-10",
       "product": "Bermuda Denim Shorts (Grey)",
       "type": "봉제 불량",
@@ -290,9 +319,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260629-0306333",
-      "id": "e78fde61e29a"
+      "image": "images/e78fde61e29a.jpg"
     },
     {
+      "id": "512294e1e89d",
       "date": "2026-07-09",
       "product": "Satin Lace Ribbon Onepiece (Moss Green)",
       "type": "봉제 불량",
@@ -300,9 +330,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606242344580003",
-      "id": "512294e1e89d"
+      "image": "images/512294e1e89d.jpg"
     },
     {
+      "id": "ba2cd55d2b77",
       "date": "2026-07-09",
       "product": "Pear Drop Necklace (Silver)",
       "type": "파손/탈락",
@@ -310,9 +341,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260615-3212684",
-      "id": "ba2cd55d2b77"
+      "image": "images/ba2cd55d2b77.jpg"
     },
     {
+      "id": "6f0889983630",
       "date": "2026-07-09",
       "product": "Blurry Tour Sweatshirt (Light Grey)",
       "type": "오염/변색",
@@ -320,9 +352,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260626-8257467",
-      "id": "6f0889983630"
+      "image": "images/6f0889983630.jpg"
     },
     {
+      "id": "641a35db2796",
       "date": "2026-07-09",
       "product": "Satin Lace Ribbon Onepiece (Moss Green)",
       "type": "파손/탈락",
@@ -330,9 +363,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202606230901510004",
-      "id": "641a35db2796"
+      "image": "images/641a35db2796.jpg"
     },
     {
+      "id": "95de4597f5bd",
       "date": "2026-07-07",
       "product": "Double Lace Puff T-Shirts (Black)",
       "type": "오염/변색",
@@ -340,9 +374,10 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260627-8536542",
-      "id": "95de4597f5bd"
+      "image": "images/95de4597f5bd.jpg"
     },
     {
+      "id": "53794e7cfa42",
       "date": "2026-07-06",
       "product": "CLASSIC LOGO CAP (PINK)",
       "type": "오염/변색",
@@ -350,9 +385,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606230857",
-      "id": "53794e7cfa42"
+      "image": "images/53794e7cfa42.jpg"
     },
     {
+      "id": "c6ede3215063",
       "date": "2026-07-06",
       "product": "Rose Punching T-Shirt (Navy)",
       "type": "봉제 불량",
@@ -360,9 +396,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606242350",
-      "id": "c6ede3215063"
+      "image": "images/c6ede3215063.jpg"
     },
     {
+      "id": "f1ef5aabb00a",
       "date": "2026-07-06",
       "product": "Satin Lace Sleeveless Blouse (Light Grey)",
       "type": "지퍼/부속 고장",
@@ -370,9 +407,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "2606241823420000",
-      "id": "f1ef5aabb00a"
+      "image": "images/f1ef5aabb00a.jpg"
     },
     {
+      "id": "5baaabde4258",
       "date": "2026-07-06",
       "product": "Crochet Rose Knit Onepiece (Dark Navy)",
       "type": "봉제 불량",
@@ -380,9 +418,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606210308",
-      "id": "5baaabde4258"
+      "image": "images/5baaabde4258.jpg"
     },
     {
+      "id": "f84972414f6e",
       "date": "2026-07-02",
       "product": "Rose Sleeveless (Cream)",
       "type": "지퍼/부속 고장",
@@ -390,9 +429,10 @@
       "result": "반품",
       "channel": "29CM",
       "orderNo": "ORD20260606-1894851",
-      "id": "f84972414f6e"
+      "image": "images/f84972414f6e.jpg"
     },
     {
+      "id": "fd9d940adc36",
       "date": "2026-07-01",
       "product": "Mini Apple Necklace Set (Silver Gold)",
       "type": "파손/탈락",
@@ -400,19 +440,20 @@
       "result": "교환",
       "channel": "29CM",
       "orderNo": "ORD20260623-6981076",
-      "id": "fd9d940adc36"
+      "image": "images/fd9d940adc36.jpg"
     },
     {
+      "id": "da21dbcb330f",
       "date": "2026-07-01",
       "product": "Blooming Girl T-Shirt",
       "type": "봉제 불량",
       "reason": "올트임",
       "result": "반품",
       "channel": "무신사",
-      "orderNo": "202606171108480003",
-      "id": "da21dbcb330f"
+      "orderNo": "202606171108480003"
     },
     {
+      "id": "6bda4a71bf78",
       "date": "2026-07-01",
       "product": "Big Ribbon Tie Blouse (Cream)",
       "type": "봉제 불량",
@@ -420,9 +461,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606210152330006",
-      "id": "6bda4a71bf78"
+      "image": "images/6bda4a71bf78.jpg"
     },
     {
+      "id": "232eb738810b",
       "date": "2026-07-01",
       "product": "CABLE KNIT HOOD (IVORY)",
       "type": "봉제 불량",
@@ -430,9 +472,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202606150053480002",
-      "id": "232eb738810b"
+      "image": "images/232eb738810b.jpg"
     },
     {
+      "id": "38bf2b754606",
       "date": "2026-07-01",
       "product": "Sheer Glow Blouse",
       "type": "기타",
@@ -440,9 +483,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606222320390002",
-      "id": "38bf2b754606"
+      "image": "images/38bf2b754606.jpg"
     },
     {
+      "id": "cd11efd2e8c4",
       "date": "2026-07-01",
       "product": "Packable Eco Bag",
       "type": "봉제 불량",
@@ -450,9 +494,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202606231655460004",
-      "id": "cd11efd2e8c4"
+      "image": "images/cd11efd2e8c4.jpg"
     },
     {
+      "id": "57667b8acaee",
       "date": "2026-07-01",
       "product": "Star Ring (Silver)",
       "type": "오염/변색",
@@ -460,9 +505,10 @@
       "result": "교환",
       "channel": "카카오",
       "orderNo": "3382773856",
-      "id": "57667b8acaee"
+      "image": "images/57667b8acaee.jpg"
     },
     {
+      "id": "97e478fa3569",
       "date": "2026-07-01",
       "product": "Sinoon Signature Logo T-Shirts (White)",
       "type": "오염/변색",
@@ -470,9 +516,10 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606221356",
-      "id": "97e478fa3569"
+      "image": "images/97e478fa3569.jpg"
     },
     {
+      "id": "a58c736ce273",
       "date": "2026-07-01",
       "product": "SN CLASSIC LOGO HALF KNIT (BLUE)",
       "type": "봉제 불량",
@@ -480,9 +527,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202606230740",
-      "id": "a58c736ce273"
+      "image": "images/a58c736ce273.jpg"
     },
     {
+      "id": "9e2a1347b85e",
       "date": "2026-06-30",
       "product": "JACQUARD RIBBON BLOUSE (WHITE)",
       "type": "기타",
@@ -490,9 +538,10 @@
       "result": "반품",
       "channel": "무신사",
       "orderNo": "202606181103210005",
-      "id": "9e2a1347b85e"
+      "image": "images/9e2a1347b85e.jpg"
     },
     {
+      "id": "eedc8339f890",
       "date": "2026-06-30",
       "product": "Eggplant Drop Necklace",
       "type": "파손/탈락",
@@ -500,7 +549,7 @@
       "result": "교환",
       "channel": "무신사",
       "orderNo": "202606212304480010",
-      "id": "eedc8339f890"
+      "image": "images/eedc8339f890.jpg"
     }
   ]
 }
